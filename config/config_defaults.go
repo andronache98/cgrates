@@ -547,6 +547,17 @@ const CGRATES_CFG_JSON = `
 	"event_socket_conns":[					// instantiate connections to multiple FreeSWITCH servers
 		{"address": "127.0.0.1:8021", "password": "ClueCon", "reconnects": 5,"alias":""}
 	],
+	"request_processors": [					// list of processors to be applied to freeswitch messages
+	{
+		"id": "",
+		"tenant": "",
+		"filters": [],
+		"flags": [],
+		"timezone": [],
+		"request_fields":[],
+		"reply_fields":[],
+	},
+		],	
 },
 
 

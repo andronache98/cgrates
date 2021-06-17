@@ -93,6 +93,7 @@ type FsAgentCfg struct {
 	EmptyBalanceAnnFile string
 	MaxWaitConnection   time.Duration
 	EventSocketConns    []*FsConnCfg
+	RequestProcessors   []*RequestProcessor
 }
 
 func (fscfg *FsAgentCfg) loadFromJSONCfg(jsnCfg *FreeswitchAgentJsonCfg) error {
@@ -139,6 +140,7 @@ func (fscfg *FsAgentCfg) loadFromJSONCfg(jsnCfg *FreeswitchAgentJsonCfg) error {
 			fscfg.EventSocketConns[idx].loadFromJSONCfg(jsnConnCfg)
 		}
 	}
+	fscfg.RequestProcessors, err = appendRequestProcessors(fscfg.RequestProcessors, jsnCfg.Request_processors, separator)
 	return nil
 }
 
@@ -207,6 +209,7 @@ type FreeswitchAgentJsonCfg struct {
 	Empty_balance_ann_file *string
 	Max_wait_connection    *string
 	Event_socket_conns     *[]*FsConnJsonCfg
+	Request_processors     *[]*ReqProcessorJsnCfg
 }
 
 // Represents one connection instance towards FreeSWITCH
